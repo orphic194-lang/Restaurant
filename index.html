@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #ffecd2, #fcb69f );
+            text-align: center;
+            padding: 20px;
+        }
+        .hover-box { width: 150px; height: 50px; background: lightgray; margin: 10px auto; padding: 15px; }
+        #toggleArea { width: 200px; height: 100px; background: #eee; margin: 10px auto;}
+        #hoverImg { width: 150px; transition: 0.3s; }
+    </style>
+</head>
+<body>
+    <h1>Hello Guys 👋</h1>
+    <h2>Welcome to our restaurant !</h2>
+    <button onclick="basicClick()">Click Me</button>
+    <p id="basicOut"></p>
+
+    <p id="textPara">Today's Special: Grilled Chicken</p>
+    <button onclick="changeText()">Change Text</button>
+
+    <div class="hover-box" onmouseover="hoverColor(this)" onmouseout="resetColor(this)">KITCHEN</div>
+
+    <input id="liveInput" type="text" onkeyup="showLivevalue()">
+    <p id="liveValue"></p>
+
+    <button onclick="countClick()">Count Clicks</button>
+    <p id="clickCount">Orders Placed</p>
+
+    <p id="keyDetect">Type anything to interact with the restaurant menu...</p>
+
+    <button onclick="toggleBG()">Toggle Color</button>
+    <div id="toggleArea"></div>
+    <br>
+
+    <img id="hoverImg" src="https://i.pinimg.com/originals/52/91/7c/52917c34da433418fda46f8adb786d74.png" onmouseover="imgHover()" onmouseout="imgOut()">
+    <br>
+    <br>
+
+    <input id="validInput" type="text" onkeyup="validateInput()">
+    <p id="validationMsg"></p>
+
+    <script>
+        function basicClick(){
+            document.getElementById('basicOut').textContent = 'lets taste our dishs';
+        }
+
+        function changeText(){
+            document.getElementById('textPara').textContent = 'Updated Special: Italian Pasta';
+        }
+
+        function hoverColor(el){
+            el.style.background = '#fcb69f';
+        }
+        function resetColor(el){
+            el.style.background = ' #ffcccd';
+        }
+
+        function showLivevalue(){
+            document.getElementById('liveValue').textContent = document.getElementById('liveInput').value;
+        }
+
+        let click = 0;
+        function countClicks() {
+            clicks++;
+            document.getElementById('clickCount').textContent = 'Orders Placed: ' + clicks;
+        }
+
+        document.addEventListener('keydown', function(event) {
+            document.getElementById('keDetect').textContent = 'You pressed: ' + event.key;
+        })
+
+        let toggled = false;
+        function toggleBG() {
+            let box = document.getElementById('toggleArea');
+            if (toggled) {
+                box.style.background = '#ffcccd';
+            } else {
+                box.style.background = '#fcb69f';
+            }
+            toggled = !toggled;
+        }
+
+        function imgHover() {
+            document.getElementById('hoverImg').style.transform = 'scale(1.1)';
+            document.getElementById('hoverImg').style.opacity = '0.7';
+        }
+        function imgOut() {
+            document.getElementById('hoverImg').style.transform = 'scale(1)';
+            document.getElementById('hoverImg').style.opacity = '1';            
+        }
+
+        function validateInput() {
+            let txt = document.getElementById('validInput').value;
+            let msg = document.getElementById('validationMsg');
+
+            if(txt.length < 3) {
+                msg.textContent = 'Name is to short! Please enter at least 3 characters.';
+                msg.style.color = "red";
+            } else {
+                msg.textContent = 'Perfect! Your name is valid for the reservation.';
+                msg.style.color = 'green';
+            }
+        }
+    </script>
+
+</body>
+</html>
